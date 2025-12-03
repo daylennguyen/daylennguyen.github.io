@@ -28,3 +28,11 @@ body {
   font-family: var(--font-alagard), sans-serif;
 }
 
+/* Crisp pixel art rendering for canvas */
+canvas {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
