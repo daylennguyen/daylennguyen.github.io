@@ -1,4 +1,4 @@
-# Sample workflow for building and deploying a Next.js site to GitHub Pages
+# Workflow for building and deploying Next.js site + Storybook to GitHub Pages
 #
 # To get started with Next.js see: https://nextjs.org/docs/getting-started
 #
@@ -82,6 +82,12 @@ jobs:
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
 
+      - name: Build Storybook
+        run: npm run build-storybook
+
+      - name: Copy Storybook to output
+        run: cp -r storybook-static ./out/storybook
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -98,4 +104,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
