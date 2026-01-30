@@ -11,6 +11,8 @@ import {
   Toolbar,
   ProgressBar,
   Anchor,
+  MenuList,
+  MenuListItem,
 } from "react95";
 
 const GITHUB_URL = "https://github.com/daylennguyen";
@@ -37,6 +39,8 @@ export default function Home() {
   const [howWindowPosition, setHowWindowPosition] = useState({ x: 80, y: 60 });
   const [isDraggingHow, setIsDraggingHow] = useState(false);
   const dragStartHowRef = useRef({ clientX: 0, clientY: 0, windowX: 0, windowY: 0 });
+  const [startMenuOpen, setStartMenuOpen] = useState(false);
+  const startMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const start = performance.now();
@@ -94,6 +98,17 @@ export default function Home() {
     };
   }, [isDraggingHow]);
 
+  useEffect(() => {
+    if (!startMenuOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (startMenuRef.current && !startMenuRef.current.contains(e.target as Node)) {
+        setStartMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [startMenuOpen]);
+
   const handleTitleBarMouseDown = (e: React.MouseEvent) => {
     if ((e.target as HTMLElement).closest("button")) return;
     e.preventDefault();
@@ -138,9 +153,31 @@ export default function Home() {
 
   return (
     <div className="flex h-screen flex-col">
-      <AppBar position="relative" className="z-20 shrink-0">
-        <Toolbar className="w-full justify-between">
-          <div className="flex items-center gap-1">
+      <AppBar position="relative" className="z-20 shrink-0 overflow-visible">
+        <Toolbar className="w-full justify-between overflow-visible">
+          <div className="flex items-center gap-1 overflow-visible" ref={startMenuRef}>
+            <div className="relative inline-block overflow-visible">
+              <Button
+                variant="menu"
+                size="sm"
+                active={startMenuOpen}
+                onClick={() => setStartMenuOpen(!startMenuOpen)}
+              >
+                Start
+              </Button>
+              {startMenuOpen && (
+                <div className="absolute left-0 top-full z-[100] mt-1 min-w-[140px]">
+                  <MenuList shadow className="!relative min-w-[140px]">
+                    <MenuListItem onClick={() => setStartMenuOpen(false)}>
+                      Kitty
+                    </MenuListItem>
+                    <MenuListItem onClick={() => setStartMenuOpen(false)}>
+                      Fishy
+                    </MenuListItem>
+                  </MenuList>
+                </div>
+              )}
+            </div>
             <Button
               variant="menu"
               size="sm"
@@ -155,7 +192,7 @@ export default function Home() {
               active={howWindowOpen}
               onClick={() => setHowWindowOpen(true)}
             >
-              ❓ How?
+              About
             </Button>
           </div>
           <div className="flex items-center px-2 text-sm font-bold tabular-nums">
