@@ -263,6 +263,9 @@ export default function ChickenCanvas() {
           0,
           Math.min(canvas.width - CHICKEN_SIZE, chicken.x)
         );
+        // While in the air, face the mouse cursor on the x-axis (no rotation)
+        const chickenCenterX = chicken.x + CHICKEN_SIZE / 2;
+        chicken.facing = mouseXRef.current >= chickenCenterX ? 'right' : 'left';
       } else {
         chicken.vx = 0;
         chicken.targetX = mouseXRef.current - CHICKEN_SIZE / 2;

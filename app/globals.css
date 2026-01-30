@@ -24,12 +24,20 @@
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 body {
   background: rgb(0, 128, 129);
   min-height: 100vh;
   color: var(--foreground);
+  /* Hide until styles are loaded to avoid FOUC */
+  visibility: hidden;
+}
+
+body.styles-ready {
+  visibility: visible;
 }
 
 /* Crisp pixel art rendering for canvas */

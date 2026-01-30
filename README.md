@@ -69,6 +69,19 @@ The site is set up for **GitHub Pages**:
 - The workflow builds the Next.js app (static export) and Storybook, then deploys the `out/` artifact to GitHub Pages.
 - Live site: **https://daylennguyen.github.io** (or your repo’s Pages URL).
 
+## Credits
+
+Assets in `public/assets/` (PNG sprites and textures):
+
+| Asset | Preview |
+|-------|---------|
+| `blocks.png` | <img src="https://raw.githubusercontent.com/daylennguyen/daylennguyen.github.io/master/public/assets/blocks.png" alt="blocks.png" width="80" /> |
+| `chicken.png` | <img src="https://raw.githubusercontent.com/daylennguyen/daylennguyen.github.io/master/public/assets/chicken.png" alt="chicken.png" width="80" /> |
+| `Custom Edited - Minecraft Customs - Chicken.png` | <img src="https://raw.githubusercontent.com/daylennguyen/daylennguyen.github.io/master/public/assets/Custom%20Edited%20-%20Minecraft%20Customs%20-%20Chicken.png" alt="Custom Edited - Minecraft Customs - Chicken.png" width="80" /> |
+| `textures.png` | <img src="https://raw.githubusercontent.com/daylennguyen/daylennguyen.github.io/master/public/assets/textures.png" alt="textures.png" width="80" /> |
+| `wolfie.png` | <img src="https://raw.githubusercontent.com/daylennguyen/daylennguyen.github.io/master/public/assets/wolfie.png" alt="wolfie.png" width="80" /> |
+| `zombie.png` | <img src="https://raw.githubusercontent.com/daylennguyen/daylennguyen.github.io/master/public/assets/zombie.png" alt="zombie.png" width="80" /> |
+
 ## License
 
 Private project.

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { createGlobalStyle, ThemeProvider, StyleSheetManager } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid";
 import { styleReset } from "react95";
@@ -44,6 +45,10 @@ export default function React95Provider({
 }: {
   children: React.ReactNode;
 }) {
+  useEffect(() => {
+    document.body.classList.add("styles-ready");
+  }, []);
+
   return (
     <StyleSheetManager shouldForwardProp={shouldForwardProp}>
       <ThemeProvider theme={original}>
