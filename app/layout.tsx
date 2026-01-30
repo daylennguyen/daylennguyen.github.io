@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import React95Provider from "./components/React95Provider";
 import "./globals.css";
-
-const alagard = localFont({
-  src: "../public/alagard.ttf",
-  variable: "--font-alagard",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Daylen Nguyen",
@@ -20,8 +14,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${alagard.variable} font-alagard`}>
-        {children}
+      <body>
+        <React95Provider>{children}</React95Provider>
       </body>
     </html>
   );

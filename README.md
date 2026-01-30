@@ -1,0 +1,74 @@
+# Daylen Nguyen
+
+Personal website with a Windows 95–style UI, built with Next.js and [React95](https://react95.io).
+
+## Features
+
+- **Windows 95 aesthetic** — AppBar, Window, Button, and MS Sans Serif font via React95
+- **Interactive chicken** — Pixel-art chicken on the ground that follows the cursor; click it to trigger a hurt animation (bounce up and left)
+- **Static export** — Configured for GitHub Pages deployment
+
+## Tech stack
+
+- **Next.js 16** (App Router, static export)
+- **React 19**
+- **React95** — Windows 95–style components
+- **styled-components** — Theming and global styles (with `StyleSheetManager` + `@emotion/is-prop-valid` for clean DOM props)
+- **Tailwind CSS 4**
+- **TypeScript**
+- **Storybook** — Component development and docs
+- **Vitest + Playwright** — Testing
+
+## Getting started
+
+### Prerequisites
+
+- Node.js 20+ (LTS recommended)
+- npm (or yarn / pnpm)
+
+### Install and run
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+### Scripts
+
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start Next.js dev server |
+| `npm run build` | Production static build (output in `out/`) |
+| `npm run start` | Serve production build (after `build`) |
+| `npm run lint` | Run ESLint |
+| `npm run storybook` | Start Storybook on port 6006 |
+| `npm run build-storybook` | Build Storybook to `storybook-static/` |
+
+## Project structure
+
+```
+├── app/
+│   ├── components/     # ChickenCanvas, React95Provider
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── public/
+│   └── assets/         # chicken.png, blocks.png, etc.
+├── stories/            # Storybook stories
+├── .github/workflows/  # GitHub Actions (deploy to Pages)
+└── next.config.ts      # static export, styled-components
+```
+
+## Deployment
+
+The site is set up for **GitHub Pages**:
+
+- Pushes to `master` trigger the **Deploy Next.js site to Pages** workflow.
+- The workflow builds the Next.js app (static export) and Storybook, then deploys the `out/` artifact to GitHub Pages.
+- Live site: **https://daylennguyen.github.io** (or your repo’s Pages URL).
+
+## License
+
+Private project.

@@ -1,30 +1,76 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import ChickenCanvas from "./components/ChickenCanvas";
+import {
+  Window,
+  WindowHeader,
+  WindowContent,
+  Button,
+  AppBar,
+  Toolbar,
+} from "react95";
+
+const GITHUB_URL = "https://github.com/daylennguyen";
+
+function formatTime(date: Date) {
+  return date.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+}
 
 export default function Home() {
+  const [time, setTime] = useState(() => formatTime(new Date()));
+
+  useEffect(() => {
+    const id = setInterval(() => setTime(formatTime(new Date())), 1000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-6xl flex-col items-center justify-center py-32 px-16 bg-transparent relative z-10">
-        <div className="flex flex-col items-center gap-16 text-center">
-          <h1 className="text-8xl tracking-tight text-black dark:text-zinc-50">
-            Daylen Nguyen
-          </h1>
-          <p className="max-w-3xl text-3xl leading-relaxed text-zinc-600 dark:text-zinc-400">
-            Welcome to my small slice of the internet 🧙🏻‍♂️
-          </p>
-          <div className="flex flex-col gap-8 text-2xl sm:flex-row">
-            <a
-              className="flex h-24 w-full items-center justify-center gap-4 rounded-full bg-black px-12 text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-black dark:hover:bg-zinc-200 sm:w-auto"
-              href="https://github.com/daylennguyen"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </a>
+    <div className="flex h-screen flex-col">
+      <AppBar position="relative" className="z-20 shrink-0">
+        <Toolbar className="w-full justify-between">
+          <div className="flex items-center gap-1">
+            <Button variant="menu" size="sm">
+              📺 Start
+            </Button>
           </div>
-        </div>
+          <div className="flex items-center px-2 text-sm font-bold tabular-nums">
+            {time}
+          </div>
+        </Toolbar>
+      </AppBar>
+      <div className="flex flex-1 items-center justify-center p-4 pt-2">
+      <main className="relative z-10 w-fit max-w-[min(100%,42rem)]">
+        <Window shadow>
+          <WindowHeader
+            active
+            className="flex justify-center"
+          >
+            <span>Daylen Nguyen</span>
+          </WindowHeader>
+          <WindowContent className="">
+            <div className="flex flex-col gap-6 py-2 items-center text-center">
+              <p className="text-lg leading-relaxed">
+                Welcome to my small slice of the internet 🧙🏻‍♂️
+              </p>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <Button
+                  primary
+                  onClick={() => window.open(GITHUB_URL, "_blank", "noopener,noreferrer")}
+                >
+                  GitHub
+                </Button>
+              </div>
+            </div>
+          </WindowContent>
+        </Window>
       </main>
+      </div>
       <ChickenCanvas />
     </div>
   );
 }
-

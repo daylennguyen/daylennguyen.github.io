@@ -8,7 +8,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-alagard: var(--font-alagard);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,16 +15,21 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
+
+  body {
+    background: rgb(0, 128, 129);
+  }
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
+  background: rgb(0, 128, 129);
+  min-height: 100vh;
   color: var(--foreground);
-  font-family: var(--font-alagard), sans-serif;
-}
-
-.font-alagard {
-  font-family: var(--font-alagard), sans-serif;
 }
 
 /* Crisp pixel art rendering for canvas */
