@@ -167,12 +167,12 @@ export default function Home() {
               </Button>
               {startMenuOpen && (
                 <div className="absolute left-0 top-full z-[100] mt-1 min-w-[140px]">
-                  <MenuList shadow className="!relative min-w-[140px]">
-                    <MenuListItem onClick={() => setStartMenuOpen(false)}>
-                      Kitty
+                  <MenuList shadow className="!relative min-w-[140px] [&_li]:!cursor-pointer">
+                    <MenuListItem onClick={() => setStartMenuOpen(false)} className="!cursor-pointer">
+                      🐈 Kitty
                     </MenuListItem>
-                    <MenuListItem onClick={() => setStartMenuOpen(false)}>
-                      Fishy
+                    <MenuListItem onClick={() => setStartMenuOpen(false)} className="!cursor-pointer">
+                      🐟 Fishy
                     </MenuListItem>
                   </MenuList>
                 </div>
