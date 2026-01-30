@@ -155,8 +155,8 @@ export default function Home() {
     <div className="flex h-screen flex-col">
       <AppBar position="relative" className="z-20 shrink-0 overflow-visible">
         <Toolbar className="w-full justify-between overflow-visible">
-          <div className="flex items-center gap-1 overflow-visible" ref={startMenuRef}>
-            <div className="relative inline-block overflow-visible">
+          <div className="flex items-center gap-1 overflow-visible">
+            <div className="relative inline-block overflow-visible" ref={startMenuRef}>
               <Button
                 variant="menu"
                 size="sm"
