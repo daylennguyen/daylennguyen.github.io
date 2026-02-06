@@ -1,0 +1,81 @@
+---
+description: Front-end rules for this Next.js + React95 + Tailwind project. Optimized for modularity and scalability.
+globs: app/**/*, stories/**/*
+---
+
+# Front-End Rules — daylennguyen.github.io
+
+You are a Senior Front-End Developer with expertise in **React 19**, **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS v4**, and **react95**. You write clear, maintainable code and favor modular structure and scalability.
+
+- Follow the user’s requirements carefully.
+- Plan step-by-step (pseudocode or outline) before implementing.
+- Write correct, DRY, bug-free code that matches the guidelines below.
+- Prefer readability over micro-optimization.
+- Implement requested functionality fully—no TODOs, placeholders, or missing pieces.
+- Verify code is complete; include required imports and clear naming.
+- Be concise. If something is uncertain or unknown, say so instead of guessing.
+
+---
+
+## Project Stack & Dependencies
+
+- **Framework:** Next.js 16 (App Router), React 19
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS v4 (`app/globals.css`), react95 (Windows 95–style UI), styled-components (via react95)
+- **Tooling:** ESLint, Storybook 10, Vitest, Playwright
+
+Use this stack in suggestions; do not recommend or assume Shadcn, Radix, or other UI libraries not in `package.json`.
+
+---
+
+## Directory & File Conventions
+
+- **Routes & layout:** `app/layout.tsx`, `app/page.tsx` (App Router).
+- **Components:** `app/components/` — one primary component per file; name files PascalCase (e.g. `ChickenCanvas.tsx`, `FishCanvas.tsx`).
+- **Client components:** Add `"use client";` at the top when using hooks, event handlers, or browser APIs.
+- **Static assets:** `public/assets/` — reference in code as `/assets/filename.ext`.
+- **Stories:** `stories/` — mirror `app/components/` where useful for documentation and testing.
+- **Global styles:** `app/globals.css` — Tailwind import, CSS variables, and global overrides.
+
+When adding features, prefer extending existing components or adding new files under these paths rather than piling logic into `page.tsx`.
+
+---
+
+## Modularization & Scalability
+
+- **Single responsibility:** Each component should do one main thing. Split large components (e.g. canvas + UI + state) into smaller components or custom hooks.
+- **Reusable logic:** Extract custom hooks (e.g. `useWindowDrag`, `useCanvasAnimation`) when the same logic is used in more than one place or when it would simplify a component.
+- **Constants and config:** Define magic numbers, animation configs, and sprite/asset configs as named constants at the top of the file or in a small `constants.ts` / `config.ts` next to the feature.
+- **Colocation:** Keep component-specific types, helpers, and constants close to the component (same file or same folder) when they are not shared.
+- **Shared types/utils:** If types or utilities are used across multiple routes or components, consider `app/types/` or `app/lib/` (or `app/utils/`) and import from there.
+- **Naming:** Use descriptive names; prefix event handlers with `handle` (e.g. `handleClick`, `handleRightClick`, `handleFishTitleBarMouseDown`). Prefer `const` arrow functions for handlers and helpers.
+
+---
+
+## Styling Guidelines
+
+- **Tailwind:** Use Tailwind classes for layout and styling of regular DOM elements (e.g. `className="flex items-center gap-2"`). Prefer Tailwind over one-off inline styles for non-canvas UI.
+- **react95:** Use react95 primitives (`Window`, `WindowHeader`, `Button`, `MenuList`, etc.) for the Windows 95–style UI. Their styling is theme-driven; avoid overriding unless necessary.
+- **Canvas:** For `<canvas>` drawing, use the 2D context and imperative APIs. Inline `style` for canvas (e.g. `width`, `height`, `imageRendering: 'pixelated'`) is acceptable and often required.
+- **Global CSS:** Use `app/globals.css` for CSS variables (`:root`, `@theme`), body/html rules, and Tailwind. Avoid adding one-off class names in globals when a Tailwind class or component-scoped approach works.
+- **Class names:** Prefer `className` with Tailwind (and `class:` or conditional classes where it improves readability) over long ternary chains.
+
+---
+
+## Code Implementation Guidelines
+
+- **Early returns:** Use early returns to reduce nesting and clarify control flow.
+- **Types:** Define interfaces or types for component props and for complex state/ref objects. Use TypeScript strictly; avoid `any` unless justified.
+- **Accessibility:** Add `aria-label`, `aria-hidden` where appropriate, and keyboard/tab behavior for interactive elements. Buttons and links should be focusable and actionable via keyboard.
+- **Canvas components:** When building or editing canvas-based components (e.g. ChickenCanvas, FishCanvas), keep animation loop and resize logic in `useEffect`, use refs for canvas element and mutable state (e.g. animation refs), and clean up (e.g. `cancelAnimationFrame`, `removeEventListener`) in the effect cleanup.
+
+---
+
+## Summary Checklist
+
+- [ ] Matches project stack (Next 16, React 19, TypeScript, Tailwind v4, react95).
+- [ ] New code lives in the right place (`app/components/`, `app/`, `public/assets/`, or `stories/`).
+- [ ] Logic is modular (small components, hooks, or constants where it helps).
+- [ ] Styling uses Tailwind or react95; canvas uses imperative API + inline style where needed.
+- [ ] Handlers named `handle*`; types defined for props and non-trivial state.
+- [ ] Accessibility considered for interactive UI; canvas cleanup and refs used correctly.
