@@ -13,6 +13,31 @@ const meta: Meta<typeof Taskbar> = {
       },
     },
   },
+  args: {
+    buttons: [
+      {
+        label: "Daylen",
+        icon: "🧙",
+        active: true,
+        onClick: () => {},
+      },
+      {
+        label: "About",
+        active: false,
+        onClick: () => {},
+      },
+    ],
+  },
+  argTypes: {
+    buttons: {
+      description:
+        "Array of taskbar button objects with label, icon, active state, and onClick handler.",
+    },
+    onFishyClick: {
+      action: "onFishyClick",
+      description: "Called when the Fishy item is clicked in the Start menu.",
+    },
+  },
   decorators: [
     (Story) => (
       <div style={{ height: "100vh", background: "rgb(0, 128, 129)" }}>
@@ -25,25 +50,14 @@ const meta: Meta<typeof Taskbar> = {
 export default meta;
 type Story = StoryObj<typeof Taskbar>;
 
-export const Default: Story = {
-  args: {
-    buttons: [
-      {
-        label: "Daylen",
-        icon: "🧙",
-        active: true,
-        onClick: () => console.log("Daylen clicked"),
-      },
-      {
-        label: "About",
-        active: false,
-        onClick: () => console.log("About clicked"),
-      },
-    ],
-    onFishyClick: () => console.log("Fishy clicked from Start menu"),
-  },
-};
+/**
+ * Default taskbar with two buttons (Daylen and About) and a working Start menu.
+ */
+export const Default: Story = {};
 
+/**
+ * Taskbar with multiple active and inactive window buttons.
+ */
 export const WithMultipleButtons: Story = {
   args: {
     buttons: [
@@ -63,6 +77,5 @@ export const WithMultipleButtons: Story = {
         onClick: () => {},
       },
     ],
-    onFishyClick: () => {},
   },
 };

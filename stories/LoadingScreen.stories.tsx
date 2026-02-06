@@ -9,8 +9,15 @@ const meta: Meta<typeof LoadingScreen> = {
     docs: {
       description: {
         component:
-          "Full-screen loading screen with progress bar. Runs for LOADING_DURATION_MS (1.2s by default).",
+          "Full-screen loading screen with progress bar. Runs for LOADING_DURATION_MS (1.2s by default) then calls onComplete.",
       },
+    },
+  },
+  argTypes: {
+    onComplete: {
+      action: "onComplete",
+      description:
+        "Callback fired when the loading progress reaches 100%.",
     },
   },
 };
@@ -18,8 +25,8 @@ const meta: Meta<typeof LoadingScreen> = {
 export default meta;
 type Story = StoryObj<typeof LoadingScreen>;
 
-export const Default: Story = {
-  args: {
-    onComplete: () => console.log("Loading complete!"),
-  },
-};
+/**
+ * Default loading screen with the Windows 95-style progress bar.
+ * Completes after ~1.2 seconds.
+ */
+export const Default: Story = {};

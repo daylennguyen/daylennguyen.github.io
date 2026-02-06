@@ -14,6 +14,37 @@ const meta: Meta<typeof DraggableWindow> = {
       },
     },
   },
+  args: {
+    title: "Example Window",
+    isOpen: true,
+    initialPosition: { x: 0, y: 0 },
+    positionMode: "translate",
+    contentClassName: "",
+  },
+  argTypes: {
+    title: {
+      control: "text",
+      description: "Title displayed in the window header",
+    },
+    isOpen: {
+      control: "boolean",
+      description: "Whether the window is visible",
+    },
+    onClose: {
+      action: "closed",
+      description: "Called when the close button is clicked",
+    },
+    positionMode: {
+      control: "select",
+      options: ["translate", "rightTop"],
+      description:
+        '"translate" for centered windows, "rightTop" for fixed right/top positioning',
+    },
+    contentClassName: {
+      control: "text",
+      description: "Optional className applied to the WindowContent",
+    },
+  },
   decorators: [
     (Story) => (
       <div
@@ -32,15 +63,21 @@ const meta: Meta<typeof DraggableWindow> = {
 export default meta;
 type Story = StoryObj<typeof DraggableWindow>;
 
+/**
+ * Default draggable window centered on screen.
+ * Drag it by the title bar and close it with the X button.
+ */
 export const Default: Story = {
-  render: () => {
-    const [isOpen, setIsOpen] = useState(true);
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(args.isOpen);
     return (
       <DraggableWindow
-        title="Example Window"
+        title={args.title}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        initialPosition={{ x: 0, y: 0 }}
+        initialPosition={args.initialPosition}
+        positionMode={args.positionMode}
+        contentClassName={args.contentClassName}
       >
         <p>This is a draggable window.</p>
         <p>Try dragging it by the title bar!</p>
@@ -49,16 +86,24 @@ export const Default: Story = {
   },
 };
 
+/**
+ * Window positioned using right/top mode — anchored to the top-right corner.
+ */
 export const RightTopPositioning: Story = {
-  render: () => {
-    const [isOpen, setIsOpen] = useState(true);
+  args: {
+    title: "Top-Right Window",
+    initialPosition: { x: 20, y: 20 },
+    positionMode: "rightTop",
+  },
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(args.isOpen);
     return (
       <DraggableWindow
-        title="Top-Right Window"
+        title={args.title}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        initialPosition={{ x: 20, y: 20 }}
-        positionMode="rightTop"
+        initialPosition={args.initialPosition}
+        positionMode={args.positionMode}
       >
         <p>Fixed to top-right corner.</p>
       </DraggableWindow>
@@ -66,16 +111,24 @@ export const RightTopPositioning: Story = {
   },
 };
 
+/**
+ * Window with custom content and no padding via contentClassName.
+ */
 export const CustomContent: Story = {
-  render: () => {
-    const [isOpen, setIsOpen] = useState(true);
+  args: {
+    title: "Custom Styled",
+    initialPosition: { x: 100, y: 50 },
+    contentClassName: "!p-0",
+  },
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(args.isOpen);
     return (
       <DraggableWindow
-        title="Custom Styled"
+        title={args.title}
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        initialPosition={{ x: 100, y: 50 }}
-        contentClassName="!p-0"
+        initialPosition={args.initialPosition}
+        contentClassName={args.contentClassName}
       >
         <div
           style={{

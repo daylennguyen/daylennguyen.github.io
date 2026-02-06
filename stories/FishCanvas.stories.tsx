@@ -9,13 +9,21 @@ const meta: Meta<typeof FishCanvas> = {
     docs: {
       description: {
         component:
-          "Animated fish canvas with swimming animation, bobbing motion, and click-to-spin. Click the fish to add 6 rotations; clicking again extends the spin.",
+          "Animated fish canvas with swimming animation, bobbing motion, and click-to-spin. Click the fish to add rotations; clicking again extends the spin.",
       },
     },
   },
   decorators: [
     (Story) => (
-      <div style={{ background: "#f0f0f0", padding: "20px" }}>
+      <div
+        style={{
+          background: "#3b9fcc",
+          padding: "20px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Story />
       </div>
     ),
@@ -25,4 +33,8 @@ const meta: Meta<typeof FishCanvas> = {
 export default meta;
 type Story = StoryObj<typeof FishCanvas>;
 
+/**
+ * Default fish canvas. The fish swims in place with a bobbing animation.
+ * Move your mouse to change the fish's facing direction, and click to spin it.
+ */
 export const Default: Story = {};

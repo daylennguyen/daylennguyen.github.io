@@ -43,6 +43,11 @@ const meta: Meta<typeof FontShowcase> = {
       },
     },
   },
+  args: {
+    text: "The quick brown fox jumps over the lazy dog",
+    size: "large",
+    darkMode: true,
+  },
   argTypes: {
     text: {
       control: "text",
