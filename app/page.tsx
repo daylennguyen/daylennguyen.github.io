@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button, Anchor } from "react95";
 import ChickenCanvas from "./components/ChickenCanvas";
 import FishCanvas from "./components/FishCanvas";
+import Roulette from "./components/Roulette";
 import LoadingScreen from "./components/LoadingScreen";
 import DraggableWindow from "./components/DraggableWindow";
 import Taskbar from "./components/Taskbar";
@@ -14,6 +15,7 @@ export default function Home() {
   const [windowOpen, setWindowOpen] = useState(true);
   const [howWindowOpen, setHowWindowOpen] = useState(false);
   const [fishWindowOpen, setFishWindowOpen] = useState(true);
+  const [rouletteWindowOpen, setRouletteWindowOpen] = useState(false);
 
   if (loading) {
     return <LoadingScreen onComplete={() => setLoading(false)} />;
@@ -36,6 +38,7 @@ export default function Home() {
           },
         ]}
         onFishyClick={() => setFishWindowOpen(true)}
+        onRouletteClick={() => setRouletteWindowOpen(true)}
       />
       <div className="flex flex-1 items-center justify-center p-4 pt-2">
         <main className="relative z-10 w-fit max-w-[min(100%,42rem)]">
@@ -92,6 +95,16 @@ export default function Home() {
             contentClassName="!p-0"
           >
             <FishCanvas />
+          </DraggableWindow>
+
+          <DraggableWindow
+            title="Roulette"
+            isOpen={rouletteWindowOpen}
+            onClose={() => setRouletteWindowOpen(false)}
+            initialPosition={{ x: 120, y: 80 }}
+            positionMode="rightTop"
+          >
+            <Roulette />
           </DraggableWindow>
         </main>
       </div>

@@ -8,6 +8,7 @@ export type StartMenuProps = {
   onToggle: () => void;
   onClose: () => void;
   onFishyClick: () => void;
+  onRouletteClick?: () => void;
 };
 
 export default function StartMenu({
@@ -15,6 +16,7 @@ export default function StartMenu({
   onToggle,
   onClose,
   onFishyClick,
+  onRouletteClick,
 }: StartMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -50,6 +52,15 @@ export default function StartMenu({
             </MenuListItem>
             <MenuListItem onClick={onFishyClick} className="!cursor-pointer">
               🐟 Fishy
+            </MenuListItem>
+            <MenuListItem
+              onClick={() => {
+                onRouletteClick?.();
+                onClose();
+              }}
+              className="!cursor-pointer"
+            >
+              🎰 Roulette
             </MenuListItem>
           </MenuList>
         </div>
