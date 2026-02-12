@@ -48,3 +48,162 @@ canvas {
   image-rendering: crisp-edges;
 }
 
+.roulette-wheel-canvas {
+  display: block;
+  width: 280px;
+  height: 280px;
+}
+
+/* Roulette betting board – match reference screenshot */
+.roulette-board {
+  --roulette-cell-w: 28px;
+  --roulette-cell-h: 24px;
+  --roulette-gap: 2px;
+  --roulette-col-bet-w: 24px; /* square: same as cell height */
+  --roulette-board-bg: #252d38;
+  --roulette-board-border: #4a5568;
+  --roulette-green: #0d7d3a;
+  --roulette-red: #c41e3a;
+  --roulette-black: #1a1a1a;
+  --roulette-text: #fff;
+  background-color: var(--roulette-board-bg);
+  border: 1px solid var(--roulette-board-border);
+  border-radius: 6px;
+  padding: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  width: fit-content;
+  min-width: calc(
+    var(--roulette-cell-w) * 13
+    + var(--roulette-col-bet-w)
+    + var(--roulette-gap) * 14
+  );
+}
+
+.roulette-board__main-grid {
+  display: grid;
+  gap: var(--roulette-gap);
+  grid-template-columns:
+    var(--roulette-cell-w)
+    repeat(12, var(--roulette-cell-w))
+    var(--roulette-col-bet-w);
+  grid-template-rows: repeat(3, var(--roulette-cell-h));
+}
+
+.roulette-board__cell-zero {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  min-width: var(--roulette-cell-w);
+  min-height: calc(3 * var(--roulette-cell-h) + 2 * var(--roulette-gap));
+  background-color: var(--roulette-green);
+  color: var(--roulette-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+.roulette-board__cell-zero:hover:not(:disabled) {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+}
+.roulette-board__cell-zero:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.roulette-board__cell-number {
+  min-width: var(--roulette-cell-w);
+  min-height: var(--roulette-cell-h);
+  color: var(--roulette-text);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+.roulette-board__cell-number:hover:not(:disabled) {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+.roulette-board__cell-number:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.roulette-board__cell-number--red {
+  background-color: var(--roulette-red);
+}
+.roulette-board__cell-number--black {
+  background-color: var(--roulette-black);
+}
+
+.roulette-board__cell-2to1 {
+  min-width: var(--roulette-cell-h);
+  min-height: var(--roulette-cell-h);
+  aspect-ratio: 1;
+  background-color: var(--roulette-black);
+  color: var(--roulette-text);
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+.roulette-board__cell-2to1:hover:not(:disabled) {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+.roulette-board__cell-2to1:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.roulette-board__dozen-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--roulette-gap);
+  margin-top: 6px;
+  width: calc(var(--roulette-cell-w) * 13 + var(--roulette-gap) * 12);
+}
+
+.roulette-board__outside-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--roulette-gap);
+  margin-top: var(--roulette-gap);
+  width: calc(var(--roulette-cell-w) * 13 + var(--roulette-gap) * 12);
+}
+
+.roulette-board__btn {
+  height: 32px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--roulette-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+}
+.roulette-board__btn:hover:not(:disabled) {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.6);
+}
+.roulette-board__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.roulette-board__btn--black {
+  background-color: var(--roulette-black);
+}
+.roulette-board__btn--red {
+  background-color: var(--roulette-red);
+}
+

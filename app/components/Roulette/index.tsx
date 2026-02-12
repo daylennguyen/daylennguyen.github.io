@@ -242,11 +242,6 @@ export default function Roulette() {
     return () => cancelAnimationFrame(animationId);
   }, []);
 
-  const cellW = 28;
-  const cellH = 24;
-  const gap = 2;
-  const mainGridWidth = 1 * cellW + 12 * cellW + 3 * (cellW + 8) + 14 * gap;
-
   return (
     <div className="flex flex-col gap-2 p-3 min-w-[520px] w-fit">
       <div className="flex items-center justify-between gap-2">
@@ -261,32 +256,18 @@ export default function Roulette() {
           ref={canvasRef}
           width={CANVAS_SIZE}
           height={CANVAS_SIZE}
-          style={{
-            width: CANVAS_SIZE,
-            height: CANVAS_SIZE,
-            display: "block",
-          }}
+          className="roulette-wheel-canvas"
           aria-label="Roulette wheel"
         />
       </div>
 
-      <div
-        className="border-2 border-[#0a0a0a] bg-[#2a2a2a] p-1.5 rounded-sm w-fit"
-        style={{ minWidth: mainGridWidth }}
-      >
-        <div
-          className="grid gap-0.5"
-          style={{
-            gridTemplateColumns: `${cellW}px repeat(12, ${cellW}px) repeat(3, ${cellW + 8}px)`,
-            gridTemplateRows: `repeat(3, ${cellH}px)`,
-          }}
-        >
+      <div className="roulette-board">
+        <div className="roulette-board__main-grid">
           <button
             type="button"
             onClick={() => placeBet({ type: "number", value: 0 })}
             disabled={!canBet}
-            className="bg-[#0d7d3a] text-white text-xs font-bold flex flex-col items-center justify-center rounded cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:ring-2 hover:ring-white col-start-1 row-span-3"
-            style={{ minWidth: cellW, minHeight: 3 * cellH + 2 * gap }}
+            className="roulette-board__cell-zero"
           >
             <span>0</span>
             {getBetEggs(placedBets, { type: "number", value: 0 }) > 0 && (
@@ -300,15 +281,8 @@ export default function Roulette() {
                 type="button"
                 onClick={() => placeBet({ type: "number", value: num })}
                 disabled={!canBet}
-                className="text-[11px] font-bold flex items-center justify-center rounded cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:ring-1 hover:ring-white"
-                style={{
-                  backgroundColor: RED_NUMBERS.has(num) ? "#c41e3a" : "#1a1a1a",
-                  color: "#fff",
-                  gridColumn: ci + 2,
-                  gridRow: ri + 1,
-                  minWidth: cellW,
-                  minHeight: cellH,
-                }}
+                className={`roulette-board__cell-number ${RED_NUMBERS.has(num) ? "roulette-board__cell-number--red" : "roulette-board__cell-number--black"}`}
+                style={{ gridColumn: ci + 2, gridRow: ri + 1 }}
               >
                 {num}
                 {getBetEggs(placedBets, { type: "number", value: num }) > 0 && (
@@ -323,13 +297,8 @@ export default function Roulette() {
               type="button"
               onClick={() => placeBet({ type: "column", which: c })}
               disabled={!canBet}
-              className="text-[9px] font-bold bg-[#1a1a1a] text-white rounded cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:ring-1 hover:ring-white row-span-3 flex flex-col items-center justify-center"
-              style={{
-                gridColumn: 13 + c,
-                gridRow: "1 / -1",
-                minWidth: cellW + 8,
-                minHeight: 3 * cellH + 2 * gap,
-              }}
+              className="roulette-board__cell-2to1"
+              style={{ gridColumn: 14, gridRow: c }}
             >
               2:1
               {getBetEggs(placedBets, { type: "column", which: c }) > 0 && (
@@ -339,19 +308,16 @@ export default function Roulette() {
           ))}
         </div>
 
-        <div
-          className="grid gap-0.5 mt-1"
-          style={{ gridTemplateColumns: "repeat(3, 1fr)", minWidth: mainGridWidth }}
-        >
+        <div className="roulette-board__dozen-row">
           {([1, 2, 3] as const).map((d) => (
             <button
               key={d}
               type="button"
               onClick={() => placeBet({ type: "dozen", which: d })}
               disabled={!canBet}
-              className="h-7 text-xs font-bold bg-[#1a1a1a] text-white rounded cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:ring-1 hover:ring-white"
+              className="roulette-board__btn roulette-board__btn--black"
             >
-              {d === 1 ? "1-12" : d === 2 ? "13-24" : "25-36"}
+              {d === 1 ? "1 to 12" : d === 2 ? "13 to 24" : "25 to 36"}
               {getBetEggs(placedBets, { type: "dozen", which: d }) > 0 && (
                 <span className="text-[9px]"> ×{getBetEggs(placedBets, { type: "dozen", which: d })}</span>
               )}
@@ -359,24 +325,21 @@ export default function Roulette() {
           ))}
         </div>
 
-        <div
-          className="grid gap-0.5 mt-0.5"
-          style={{ gridTemplateColumns: "repeat(6, 1fr)", minWidth: mainGridWidth }}
-        >
+        <div className="roulette-board__outside-row">
           <button
             type="button"
             onClick={() => placeBet({ type: "low" })}
             disabled={!canBet}
-            className="h-7 text-xs font-bold bg-[#1a1a1a] text-white rounded cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:ring-1 hover:ring-white"
+            className="roulette-board__btn roulette-board__btn--black"
           >
-            1-18
+            1 to 18
             {getBetEggs(placedBets, { type: "low" }) > 0 && ` ×${getBetEggs(placedBets, { type: "low" })}`}
           </button>
           <button
             type="button"
             onClick={() => placeBet({ type: "even" })}
             disabled={!canBet}
-            className="h-7 text-xs font-bold bg-[#1a1a1a] text-white rounded cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:ring-1 hover:ring-white"
+            className="roulette-board__btn roulette-board__btn--black"
           >
             Even
             {getBetEggs(placedBets, { type: "even" }) > 0 && ` ×${getBetEggs(placedBets, { type: "even" })}`}
@@ -385,7 +348,7 @@ export default function Roulette() {
             type="button"
             onClick={() => placeBet({ type: "red" })}
             disabled={!canBet}
-            className="h-7 text-xs font-bold bg-[#c41e3a] text-white rounded cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:ring-1 hover:ring-white"
+            className="roulette-board__btn roulette-board__btn--red"
           >
             Red
             {getBetEggs(placedBets, { type: "red" }) > 0 && ` ×${getBetEggs(placedBets, { type: "red" })}`}
@@ -394,7 +357,7 @@ export default function Roulette() {
             type="button"
             onClick={() => placeBet({ type: "black" })}
             disabled={!canBet}
-            className="h-7 text-xs font-bold bg-[#1a1a1a] text-white rounded cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:ring-1 hover:ring-white"
+            className="roulette-board__btn roulette-board__btn--black"
           >
             Black
             {getBetEggs(placedBets, { type: "black" }) > 0 && ` ×${getBetEggs(placedBets, { type: "black" })}`}
@@ -403,7 +366,7 @@ export default function Roulette() {
             type="button"
             onClick={() => placeBet({ type: "odd" })}
             disabled={!canBet}
-            className="h-7 text-xs font-bold bg-[#1a1a1a] text-white rounded cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:ring-1 hover:ring-white"
+            className="roulette-board__btn roulette-board__btn--black"
           >
             Odd
             {getBetEggs(placedBets, { type: "odd" }) > 0 && ` ×${getBetEggs(placedBets, { type: "odd" })}`}
@@ -412,9 +375,9 @@ export default function Roulette() {
             type="button"
             onClick={() => placeBet({ type: "high" })}
             disabled={!canBet}
-            className="h-7 text-xs font-bold bg-[#1a1a1a] text-white rounded cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed hover:ring-1 hover:ring-white"
+            className="roulette-board__btn roulette-board__btn--black"
           >
-            19-36
+            19 to 36
             {getBetEggs(placedBets, { type: "high" }) > 0 && ` ×${getBetEggs(placedBets, { type: "high" })}`}
           </button>
         </div>
