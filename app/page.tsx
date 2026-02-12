@@ -8,7 +8,7 @@ import Roulette from "./components/Roulette";
 import LoadingScreen from "./components/LoadingScreen";
 import DraggableWindow from "./components/DraggableWindow";
 import Taskbar from "./components/Taskbar";
-import { GITHUB_URL, REPO_URL } from "./lib/constants";
+import { GITHUB_URL, REPO_URL, STORYBOOK_URL } from "./lib/constants";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -39,6 +39,9 @@ export default function Home() {
         ]}
         onFishyClick={() => setFishWindowOpen(true)}
         onRouletteClick={() => setRouletteWindowOpen(true)}
+        onStorybookClick={() =>
+          window.open(STORYBOOK_URL, "_blank", "noopener,noreferrer")
+        }
       />
       <div className="flex flex-1 items-center justify-center p-4 pt-2">
         <main className="relative z-10 w-fit max-w-[min(100%,42rem)]">

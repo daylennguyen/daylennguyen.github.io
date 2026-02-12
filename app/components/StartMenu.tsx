@@ -9,6 +9,7 @@ export type StartMenuProps = {
   onClose: () => void;
   onFishyClick: () => void;
   onRouletteClick?: () => void;
+  onStorybookClick?: () => void;
 };
 
 export default function StartMenu({
@@ -17,6 +18,7 @@ export default function StartMenu({
   onClose,
   onFishyClick,
   onRouletteClick,
+  onStorybookClick,
 }: StartMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -61,6 +63,15 @@ export default function StartMenu({
               className="!cursor-pointer"
             >
               🎰 Roulette
+            </MenuListItem>
+            <MenuListItem
+              onClick={() => {
+                onStorybookClick?.();
+                onClose();
+              }}
+              className="!cursor-pointer"
+            >
+              📚 Storybook
             </MenuListItem>
           </MenuList>
         </div>

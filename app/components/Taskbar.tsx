@@ -16,12 +16,14 @@ export type TaskbarProps = {
   buttons: TaskbarButton[];
   onFishyClick?: () => void;
   onRouletteClick?: () => void;
+  onStorybookClick?: () => void;
 };
 
 export default function Taskbar({
   buttons,
   onFishyClick,
   onRouletteClick,
+  onStorybookClick,
 }: TaskbarProps) {
   const [time, setTime] = useState(() => formatTime(new Date()));
   const [startMenuOpen, setStartMenuOpen] = useState(false);
@@ -41,6 +43,11 @@ export default function Taskbar({
     setStartMenuOpen(false);
   };
 
+  const handleStorybookClick = () => {
+    onStorybookClick?.();
+    setStartMenuOpen(false);
+  };
+
   return (
     <AppBar position="relative" className="z-20 shrink-0 overflow-visible">
       <Toolbar className="w-full justify-between overflow-visible">
@@ -51,6 +58,7 @@ export default function Taskbar({
             onClose={() => setStartMenuOpen(false)}
             onFishyClick={handleFishyClick}
             onRouletteClick={handleRouletteClick}
+            onStorybookClick={handleStorybookClick}
           />
           {buttons.map((button, i) => (
             <Button
