@@ -49,9 +49,6 @@ export default function StartMenu({
             shadow
             className="!relative min-w-[140px] [&_li]:!cursor-pointer"
           >
-            <MenuListItem onClick={onClose} className="!cursor-pointer">
-              🐈 Kitty
-            </MenuListItem>
             <MenuListItem onClick={onFishyClick} className="!cursor-pointer">
               🐟 Fishy
             </MenuListItem>

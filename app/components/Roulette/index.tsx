@@ -261,7 +261,8 @@ export default function Roulette() {
         />
       </div>
 
-      <div className="roulette-board">
+      <div className="flex justify-center">
+        <div className="roulette-board">
         <div className="roulette-board__main-grid">
           <button
             type="button"
@@ -380,6 +381,7 @@ export default function Roulette() {
             19 to 36
             {getBetEggs(placedBets, { type: "high" }) > 0 && ` ×${getBetEggs(placedBets, { type: "high" })}`}
           </button>
+        </div>
         </div>
       </div>
 
