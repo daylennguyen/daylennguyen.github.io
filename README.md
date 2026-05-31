@@ -1,4 +1,12 @@
-# Daylen Nguyen
+# daylennguyen.github.io
+
+**Live site:** [https://daylennguyen.github.io/](https://daylennguyen.github.io/) redirects to **[https://itme.day/](https://itme.day/)**.
+
+The React95 Next.js project below is kept in this repo for reference. The previous Windows 95 build is archived on branch `archive/react95-site`.
+
+---
+
+# Daylen Nguyen (archived React95 site)
 
 Personal website with a Windows 95–style UI, built with Next.js and [React95](https://react95.io).
 
